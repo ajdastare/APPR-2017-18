@@ -6,9 +6,10 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 
 Izbrala sem  temo stanovanjski pogoji v Sloveniji. Analizirala bom podatke o stanovanjskih razmerah, prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države.
 
-Podatki so v obliki : 
-CSV
-HTML
+Podatki so v obliki CSV in HTML.
+Vir podatkov: http://pxweb.stat.si/pxweb/Database/Dem_soc/Dem_soc.asp
+
+
 
 1.Tabela : Breme stanovanjskih stroškov za gospodinjstva, glede na dohodek.
 Podatke bom analizirala za leto 2014, 2015 in 2016.
@@ -20,6 +21,7 @@ Podatke bom analizirala za leto 2014, 2015 in 2016.
 - socialni položaj
 
 3.Tabela : Stopnja stanovanjske prikrajšanosti glede na elemente prikrajšanosti. Analizirala bom podatke odstotkov oseb glede na spol, starostno skupino in glede na socialni položaj, ki so prikrajšane za posamezni element stanovanjske prikrajšanosti. 
+
 Vrstice bodo predstavljale : 
 -starostno skupino
 -spol
