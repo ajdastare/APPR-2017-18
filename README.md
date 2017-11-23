@@ -12,22 +12,21 @@ Vir podatkov: http://pxweb.stat.si/pxweb/Database/Dem_soc/Dem_soc.asp
 
 
 1.Tabela : Breme stanovanjskih stroškov za gospodinjstva, glede na dohodek.
-Podatke bom analizirala za leto 2014, 2015 in 2016.
-- kvantil(gospodinjstva razdelimo na 5 različnih kvantilov glede na dohodek)
-- kakšno breme predstavljajo stanovanjski stroški v deležih ( veliko, srednje, malo) 
+Podatke bom analizirala za leto 2014, 2015 in 2016. Podatki bodo: 
+* kvantil (gospodinjstva razdelimo na 5 različnih kvantilov glede na dohodek)
+* kakšno breme predstavljajo stanovanjski stroški v deležih ( veliko, srednje, malo) 
 
 2. Tabela: Stopnja prenaseljenosti stanovanja. To je odstotek oseb, ki živijo v stanovanjih s premajhnim številom sob glede na število članov gospodinjstva, zato bom v tabelo vključila podatke :
-- delež oseb v prenaseljenih stanovanjih 
-- socialni položaj
+*delež oseb v prenaseljenih stanovanjih 
+*socialni položaj
 
 3.Tabela : Stopnja stanovanjske prikrajšanosti glede na elemente prikrajšanosti. Analizirala bom podatke odstotkov oseb glede na spol, starostno skupino in glede na socialni položaj, ki so prikrajšane za posamezni element stanovanjske prikrajšanosti. 
-
 Vrstice bodo predstavljale : 
--starostno skupino
--spol
+*starostno skupino 
+*spol
 
 Stolpci pa bodo predstavljali:
--socialni položaj(nad pragom tveganja revščine/pod pragom tveganja revščine)
+*socialni položaj(nad pragom tveganja revščine/pod pragom tveganja revščine)
 
 
 ## Program
