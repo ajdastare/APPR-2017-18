@@ -7,26 +7,25 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 Izbrala sem  temo stanovanjski pogoji v Sloveniji. Analizirala bom podatke o stanovanjskih razmerah, prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države.
 
 Podatki so v obliki : 
-- CSV
--HTML
+CSV
+HTML
 
-1.Tabela : Breme stanovanjskih stroškov za gospodinjstva, glede na dohodek
+1.Tabela : Breme stanovanjskih stroškov za gospodinjstva, glede na dohodek.
 Podatke bom analizirala za leto 2014, 2015 in 2016.
 - kvantil(gospodinjstva razdelimo na 5 različnih kvantilov glede na dohodek)
 - kakšno breme predstavljajo stanovanjski stroški v deležih ( veliko, srednje, malo) 
 
 2. Tabela: Stopnja prenaseljenosti stanovanja. To je odstotek oseb, ki živijo v stanovanjih s premajhnim številom sob glede na število članov gospodinjstva, zato bom v tabelo vključila podatke :
-- delež oseb v prenaseljenih stanovanjih za osebe, ki so socialno nad pragom tveganja revščine
-- delež oseb v prensaseljenih stanovanjih za osebe, ki so socialno pod pragom tveganja revščine
+- delež oseb v prenaseljenih stanovanjih 
+- socialni položaj
 
 3.Tabela : Stopnja stanovanjske prikrajšanosti glede na elemente prikrajšanosti. Analizirala bom podatke odstotkov oseb glede na spol, starostno skupino in glede na socialni položaj, ki so prikrajšane za posamezni element stanovanjske prikrajšanosti. 
-Vrstice bodo poredstavljale : 
-- starostno skupino
+Vrstice bodo predstavljale : 
+-starostno skupino
 -spol
+
 Stolpci pa bodo predstavljali:
-- socialni položaj(nad pragom tveganja revščine/pod pragom tveganja revščine)
-
-
+-socialni položaj(nad pragom tveganja revščine/pod pragom tveganja revščine)
 
 
 ## Program
