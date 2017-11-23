@@ -29,8 +29,6 @@ Stolpci pa bodo predstavljali:
 
 
 
-
-
 ## Program
 
 Glavni program in poročilo se nahajata v datoteki `projekt.Rmd`. Ko ga prevedemo,
