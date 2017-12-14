@@ -2,15 +2,11 @@
 #1. CSV TABELA
 stanovanjska_p <- read.csv2(file="stopnja_pre1.csv",skip = 3, header=FALSE, sep=";"
                             
-                            )
-
-# stanovanjska_p <- apply(stanovanjska_p,2, function(x) gsub(";","",x))
+                      )
 
 
 stanovanjska_p <- stanovanjska_p[-c(7:28),]
 stanovanjska_p <- stanovanjska_p[-c(2:3),-c(1:2)]
-
-
 
 
 vektor_z_letnicami <- stanovanjska_p[1, ]
@@ -21,6 +17,7 @@ stanovanjska_p <- stanovanjska_p[,-c(1)]
 stanovanjska_p <- stanovanjska_p[-c(4),]
 colnames(stanovanjska_p)<-c(2005:2016)
 stanovanjska_p <- stanovanjska_p[-c(1),]
+
 View(stanovanjska_p)
 
 
