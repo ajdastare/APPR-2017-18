@@ -1,14 +1,23 @@
 # 2. faza: Uvoz podatkov
 #1. CSV TABELA
-stanovanjska_p <- read.csv(file="stopnja_pre.csv",skip = 3, header=TRUE, sep=",")
-stanovanjska_p <- apply(stanovanjska_p,2, function(x) gsub(";","",x))
+letnice <- c("1","2","3","2005","2006","2007","2008","2009", "2010", "2011", "2012", "2013","2014","2015","2016")
+stanovanjska_p <- read.csv2(file="stopnja_pre.csv",skip = 3, header=FALSE, sep=";",
+                            col.names = letnice
+                            )
+# stanovanjska_p <- apply(stanovanjska_p,2, function(x) gsub(";","",x))
+vektor_z_letnicami <- stanovanjska_p[1, 4:9]
+# stanovanjska_p <- colnames(vektor_z_letnicami)
+# stanovanjska_p <- skip(1:2)
+
 
 
 
 #2.CSV TABELA 
-stopnja_p <- read.csv(file = "stopnja_prenaseljenosti.csv", header = TRUE, sep=",")
+stopnja_p <- read.csv(file = "stopnja_prenaseljenosti.csv", header = FALSE, sep=",")
+vrstice <- stopnja_p[3,]
 
-stopnja_p <- apply(obsojeni,2, function(x) gsub("-",NA,x))
+
+# stopnja_p <- apply(obsojeni,2, function(x) gsub("-",NA,x))
 
 # 
 # sl <- locale("sl", decimal_mark = ",", grouping_mark = ".")
@@ -23,7 +32,7 @@ stopnja_p <- apply(obsojeni,2, function(x) gsub("-",NA,x))
 #     if (is.character(tabela[[i]])) {
 #       Encoding(tabela[[i]]) <- "UTF-8"
 #     }
-  }
+  
   # colnames(tabela) <- c("obcina", "povrsina", "prebivalci", "gostota", "naselja",
   #                       "ustanovitev", "pokrajina", "regija", "odcepitev")
   # tabela$obcina <- gsub("Slovenskih", "Slov.", tabela$obcina)

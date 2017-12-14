@@ -1,0 +1,39 @@
+"Stopnja prenaseljenosti stanovanja po: VKLJUÈENA GOSPODINJSTVA,"
+"STAROSTNE SKUPINE, MERITVE, SPOL, LETO , STATUS TVEGANJA REVŠÈINE"
+
+" ";" ";" ";" ";"2014";" ";" ";"2015";" ";" ";"2016";" ";" "
+" ";" ";" ";" ";"Status tveganja revšèine -SKUPAJ";"Nad pragom tveganja revšèine";"Pod pragom tveganja revšèine";"Status tveganja revšèine -SKUPAJ";"Nad pragom tveganja revšèine";"Pod pragom tveganja revšèine";"Status tveganja revšèine -SKUPAJ";"Nad pragom tveganja revšèine";"Pod pragom tveganja revšèine"
+"Vsa gospodinjstva"
+" ";"Starostne skupine - SKUPAJ"
+" ";" ";"Stopnja prenaseljenosti stanovanja (% oseb)"
+" ";" ";" ";"Moški";15.2;13.5;25.6;13.8;12.3;23.8;12.7;11.7;20.4
+" ";" ";" ";"Ženske";14.4;12.7;24.2;13.5;11.9;22.5;12.4;10.9;20.5
+" ";" ";"Število oseb v prenaseljenih stanovanjih"
+" ";" ";" ";"Moški";151000;116000;35000;138000;107000;31000;127000;102000;25000
+" ";" ";" ";"Ženske";146000;109000;37000;137000;101000;36000;126000;94000;32000
+
+"Vir: Statistièni urad Republike Slovenije (SILC). "
+" "
+"STOPNJA PRENASELJENOSTI STANOVANJA je odstotek oseb, ki živijo v "
+"stanovanjih s premajhnim številom sob glede na število èlanov "
+"gospodinjstva. Pogoj, da je stanovanje prenaseljeno, je, da nima vsaj "
+"ene sobe na gospodinjstvo in hkrati še ene sobe za vsak par, ene sobe "
+"za vsako polnoletno samsko osebo, ene sobe za dva otroka istega "
+"spola, stara od 12 do 17 let, ene sobe za vsakega otroka razliènega "
+"spola, starega od 12 do 17 let, in ene sobe za 2 otroka, mlajša od 12 "
+"let. "
+" "
+"Z raziskovanjem SILC za leto 2011 se je spremenila metodologija "
+"izraèuna tega kazalnika, zato podatki od leta 2011 dalje niso "
+"primerljivi s podatki za pretekla leta. Do leta 2010 se kuhinja ni "
+"štela za sobo, od leta 2011 dalje se med sobe šteje tudi kuhinja, èe "
+"meri vsaj 6 m2 in jo gospodinjstvo uporablja tudi kot jedilnico, "
+"dnevno sobo, delovno sobo ali za podobne namene."
+
+"Povezene vsebine: "
+"- (seznam "
+"HREF=http://www.stat.si/StatWeb/Common/PrikaziDokument.ashx?IdDatotek-"
+"e=8141 target=_blank) Metodološka pojasnila "
+
+"Nekateri seštevki se zaradi zaokroževanja ne ujemajo."
+
