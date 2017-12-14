@@ -44,6 +44,7 @@ shranijo v mapo `../zemljevidi/` (torej izven mape projekta).
 
 ## Potrebni paketi za R
 
+
 Za zagon tega vzorca je potrebno namestiti sledeče pakete za R:
 
 * `knitr` - za izdelovanje poročila

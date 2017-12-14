@@ -1,20 +1,34 @@
 # 2. faza: Uvoz podatkov
 #1. CSV TABELA
-letnice <- c("1","2","3","2005","2006","2007","2008","2009", "2010", "2011", "2012", "2013","2014","2015","2016")
-stanovanjska_p <- read.csv2(file="stopnja_pre.csv",skip = 3, header=FALSE, sep=";",
-                            col.names = letnice
+stanovanjska_p <- read.csv2(file="stopnja_pre1.csv",skip = 3, header=FALSE, sep=";"
+                            
                             )
+
 # stanovanjska_p <- apply(stanovanjska_p,2, function(x) gsub(";","",x))
-vektor_z_letnicami <- stanovanjska_p[1, 4:9]
-# stanovanjska_p <- colnames(vektor_z_letnicami)
-# stanovanjska_p <- skip(1:2)
 
 
+stanovanjska_p <- stanovanjska_p[-c(7:28),]
+stanovanjska_p <- stanovanjska_p[-c(2:3),-c(1:2)]
+
+
+
+
+vektor_z_letnicami <- stanovanjska_p[1, ]
+ime_vrstic <- c("leto","Moški","Ženske","NULL")
+
+rownames(stanovanjska_p)<-ime_vrstic
+stanovanjska_p <- stanovanjska_p[,-c(1)]
+stanovanjska_p <- stanovanjska_p[-c(4),]
+colnames(stanovanjska_p)<-c(2005:2016)
+stanovanjska_p <- stanovanjska_p[-c(1),]
+View(stanovanjska_p)
 
 
 #2.CSV TABELA 
-stopnja_p <- read.csv(file = "stopnja_prenaseljenosti.csv", header = FALSE, sep=",")
+stopnja_p <- read.csv2(file = "stopnja_prenaseljenosti.csv", header = FALSE, sep=";")
 vrstice <- stopnja_p[3,]
+colnames(stopnja_p) <- vrstice
+
 
 
 # stopnja_p <- apply(obsojeni,2, function(x) gsub("-",NA,x))
@@ -43,9 +57,9 @@ vrstice <- stopnja_p[3,]
   # }
   # for (col in c("obcina", "pokrajina", "regija")) {
   #   tabela[[col]] <- factor(tabela[[col]])
-  
-  return(tabela)
-}
+#   
+#   return(tabela)
+# }
 
 # # Funkcija, ki uvozi podatke iz datoteke druzine.csv
 # uvozi.druzine <- function(obcine) {
