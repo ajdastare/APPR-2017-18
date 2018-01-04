@@ -1,4 +1,11 @@
 # 3. faza: Vizualizacija podatkov
+# Graf 
+library(ggplot2)
+ggplot2(data=stopnja_prenaseljenosti, mapping= aes(x = "Leto", y = "% oseb" )
+       )
+
+
+
 
 # Uvozimo zemljevid.
 zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip",
