@@ -6,7 +6,13 @@ sl <- locale(encoding = "Windows-1250", decimal_mark = ".", grouping_mark = ",")
 datoteka1 <- "podatki/stopnja_pre1.csv"
 
 stopnja_prenaseljenosti <-read_delim(datoteka1, ";",skip = 3, trim_ws = TRUE, locale = sl) %>%
-  fill(1:2) %>% drop_na(3)
+  fill(1:2) %>% drop_na(3) %>% melt() %>% mutate(variable = parse_number(variable))
+colnames(stopnja_prenaseljenosti)<- c("Kategorija","Vsa gospodinjstva","Spol","Leto","% oseb")
+tabela2 <- stopnja_prenaseljenosti
+
+
+#melt je dal v stolpce, mutate spremeni leto v število
+
 
 # col_names(stopnja_prenaseljenosti)= c("Stopnja prenaseljenosti stanovanja","Vsa gospodinjstva","Spol",2005:2016)
 
@@ -44,7 +50,7 @@ stolpci2 <- read_csv2(datoteka2, skip = 3, n_max = 1, col_names = FALSE,
   apply(1, paste, collapse = "")
 stolpci2[1:3] <- c("element", "starost", "spol")
 colnames(stan.pri2) <- stolpci2
-stan.pri2.tidy <- melt(stan.pri2, value.name = "stopnja", id.vars = 1:3, variable.name = "stolpec") %>%
+stan.pri2 <- melt(stan.pri2, value.name = "stopnja", id.vars = 1:3, variable.name = "stolpec") %>%
   mutate(stolpec = parse_character(stolpec, locale = sl)) %>%
   transmute(leto = stolpec %>% strapplyc("^([0-9]+)") %>% unlist() %>% parse_number(),
             status = stolpec %>% strapplyc("([^0-9]+)$") %>% unlist() %>% factor(),
@@ -67,8 +73,7 @@ tabela1 <- stan.pri2
 # sl <- locale("sl", decimal_mark = ",", grouping_mark = ".")
 
 
-# 3.HTML TABELA
-
+# 3.HTML TABELA (PRENASELJENOST PO DRŽAVAH)
 
 pre.moski <- read_html("podatki/prenaseljenost_eurostat_moski.htm") %>%
   html_node(xpath="//table[@class='infoData']") %>% html_table() %>%
