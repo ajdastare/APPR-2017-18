@@ -7,35 +7,10 @@ datoteka1 <- "podatki/stopnja_pre1.csv"
 
 stopnja_prenaseljenosti <-read_delim(datoteka1, ";",skip = 3, trim_ws = TRUE, locale = sl) %>%
   fill(1:2) %>% drop_na(3) %>% melt() %>% mutate(variable = parse_number(variable))
-colnames(stopnja_prenaseljenosti)<- c("Kategorija","Vsa gospodinjstva","Spol","Leto","% oseb")
+colnames(stopnja_prenaseljenosti)<- c("Kategorija","Vsa gospodinjstva","Spol","Leto","odstotek_oseb")
 tabela2 <- stopnja_prenaseljenosti
 
-
 #melt je dal v stolpce, mutate spremeni leto v število
-
-
-# col_names(stopnja_prenaseljenosti)= c("Stopnja prenaseljenosti stanovanja","Vsa gospodinjstva","Spol",2005:2016)
-
-tab2 <- read_csv2(file=datoteka1,skip = 6, n_max= 2, 
-                    col_names = c("Stopnja prenaseljenosti stanovanja","Vsa gospodinjstva","Spol",2005:2016),
-                    locale=locale(encoding="Windows-1250"))
-  
-
-
-
-# stan.pri <- read_delim(datoteka1, ";", skip = 3,  trim_ws = TRUE, locale = sl) %>%
-#   fill(1:2) %>% drop_na(3)
-# stolpci1 <- read_csv2(datoteka1, skip = 3, n_max = 1, col_names = FALSE,
-#                      col_types = cols(.default = col_integer())) %>% t() %>%
-#   cbind(data.frame(colnames(stopnja_prenaseljenosti) %>% strapplyc("^([^_]+)") %>% unlist())) %>% fill(1) %>%
-#   apply(1, paste, collapse = "")
-# stolpci1[1:3] <- c("element", "starost", "spol")
-# colnames(stan.pri) <- stolpci1
-# stan.pri <- melt(stan.pri, value.name = "stopnja", id.vars = 1:3, variable.name = "stolpec") %>%
-  # mutate(stolpec = parse_character(stolpec)) %>%
-  # transmute(leto = stolpec %>% strapplyc("^([0-9]+)") %>% unlist() %>% parse_number(),
-            # status = stolpec %>% strapplyc("([^0-9]+)$") %>% unlist() %>% factor(),
-            # element, starost, spol, stopnja)
 
 
 #2.CSV TABELA -STANOVANJSKA PRIKRAJSANOST
@@ -57,20 +32,6 @@ stan.pri2 <- melt(stan.pri2, value.name = "stopnja", id.vars = 1:3, variable.nam
             element, starost, spol, stopnja)
 
 tabela1 <- stan.pri2
-
-# uvozi.stanovanjska_prikrajsanost <- function(){
-# stanovanjska_prikrajsanost <- read.csv2(file = "stanovanjska_prikrajsanost.csv", header = FALSE, sep=";")
-# stanovanjska_prikrajsanost <- stanovanjska_prikrajsanost[-c(73:98),]
-# stanovanjska_prikrajsanost<- stanovanjska_prikrajsanost[-c(1:2),]
-# View(stanovanjska_prikrajsanost)
-# 
-# }
-# 
-
-# stopnja_p <- apply(obsojeni,2, function(x) gsub("-",NA,x))
-
-# 
-# sl <- locale("sl", decimal_mark = ",", grouping_mark = ".")
 
 
 # 3.HTML TABELA (PRENASELJENOST PO DRŽAVAH)

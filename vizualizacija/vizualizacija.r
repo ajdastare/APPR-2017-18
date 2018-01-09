@@ -1,8 +1,12 @@
 # 3. faza: Vizualizacija podatkov
 # Graf 
 library(ggplot2)
-ggplot2(data=stopnja_prenaseljenosti, mapping= aes(x = "Leto", y = "% oseb" )
-       )
+library(dplyr)
+
+# 1.Graf bo prikazoval stopnjo prenaseljenosti v Sloveniji(STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016))
+
+ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb) )) + geom_point()
+
 
 
 
