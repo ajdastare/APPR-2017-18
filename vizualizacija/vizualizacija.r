@@ -5,20 +5,21 @@ library(dplyr)
 
 # 1.Graf bo prikazoval stopnjo prenaseljenosti v Sloveniji(STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016))
 
-ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb) )) + geom_point()
-
-
+graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),color = Spol ))+
+  geom_point(shape=1)+
+  geom_smooth(method=lm , color="red", se=TRUE)+
+  xlab("Leto") + ylab("Odstotek oseb") +
+  ggtitle("Stopnja prenaseljenosti stanovanja (2005-2016)")
 
 
 
 # Uvozimo zemljevid.
-zemljevid <- uvozi.zemljevid("http://baza.fmf.uni-lj.si/OB.zip",
-                             "OB/OB", encoding = "Windows-1250")
-levels(zemljevid$OB_UIME) <- levels(zemljevid$OB_UIME) %>%
-  { gsub("Slovenskih", "Slov.", .) } %>% { gsub("-", " - ", .) }
-zemljevid$OB_UIME <- factor(zemljevid$OB_UIME, levels = levels(obcine$obcina))
-zemljevid <- pretvori.zemljevid(zemljevid)
+svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
+                          "ne_50m_admin_0_countries", encoding = "UTF-8") %>%
+  pretvori.zemljevid() %>% filter(lat > -60)
 
-# Izračunamo povprečno velikost družine
-povprecja <- druzine %>% group_by(obcina) %>%
-  summarise(povprecje = sum(velikost.druzine * stevilo.druzin) / sum(stevilo.druzin))
+
+svet1 <- ggplot()+geom_polygon(data=evropa, aes(x=long, y= lat, group = group))
+print(evropa1)
+
+
