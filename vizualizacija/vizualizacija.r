@@ -19,7 +19,20 @@ svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthd
   pretvori.zemljevid() %>% filter(lat > -60)
 
 
-svet1 <- ggplot()+geom_polygon(data=evropa, aes(x=long, y= lat, group = group))
-print(evropa1)
+svet1 <- ggplot()+geom_polygon(data=svet, aes(x=long, y= lat, group = group))
+print(svet1)
+
+#rada bi dala podatke iz tabele : prenaseljenosti v zemljeviud
+
+prenaseljenost_moski <- prenaseljenost %>% filter(spol == "moski", stopnja != "NA")
+
+prenaseljenost_zenske <- prenaseljenost %>% filter(spol == "zenske", stopnja != "NA")
+
+#odstranla podatke z vrednostjo NA 
+zemljevid2 <-ggplot() + aes(x = long, y=lat, group= group, fill= stopnja ) + geom_polygon(data = svet %>% filter(CONTINENT == "Europe" |
+                                                                                                                   SOVEREIGNT %in% c("Canada",
+                                                                                                                                     "United States of America")))
+print(zemljevid2)
+
 
 
