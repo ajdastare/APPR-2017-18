@@ -2,6 +2,7 @@
 #1. CSV TABELA
 #STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016)
 
+
 sl <- locale(encoding = "Windows-1250", decimal_mark = ".", grouping_mark = ",")
 datoteka1 <- "podatki/stopnja_pre1.csv"
 

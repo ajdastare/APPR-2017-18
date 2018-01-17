@@ -18,7 +18,7 @@ svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthd
                           "ne_50m_admin_0_countries", encoding = "UTF-8") %>%
   pretvori.zemljevid() %>%  filter(CONTINENT %in% c("Europe"))
   
-  # filter(lat > -60)
+
 
 zemljevid_drzav <-ggplot() + geom_polygon(data = prenaseljenost %>% 
                                       mutate(SOVEREIGNT = parse_factor(timegeo,levels(svet$SOVEREIGNT)))%>%
@@ -29,24 +29,24 @@ zemljevid_drzav <-ggplot() + geom_polygon(data = prenaseljenost %>%
   coord_cartesian(xlim = c(-22, 40), ylim = c(30, 70)) +
   ggtitle("Stopnja prenaseljenosti v Evropi")
 
-print(zemljevid_drzav)
 
 
 
-# svet1 <- ggplot()+geom_polygon(data=svet, aes(x=long, y= lat, group = group))
-# print(svet1)
 
-#rada bi dala podatke iz tabele prenaseljenosti v zemljeviud
-
-prenaseljenost_moski <- prenaseljenost %>% filter(spol == "moski", stopnja != "NA")
-
-prenaseljenost_zenske <- prenaseljenost %>% filter(spol == "zenske", stopnja != "NA")
-
-#odstranla podatke z vrednostjo NA 
-# zemljevid2 <-ggplot() + aes(x = long, y=lat, group= group, fill= stopnja ) + geom_polygon(data = svet %>% filter(CONTINENT == "Europe" |
-#                                                                                                                    SOVEREIGNT %in% c("Canada",
-#                                                                                                                                      "United States of America")))
-print(zemljevid2)
-
+# 
+# # svet1 <- ggplot()+geom_polygon(data=svet, aes(x=long, y= lat, group = group))
+# # print(svet1)
+# 
+# #rada bi dala podatke iz tabele prenaseljenosti v zemljeviud
+# 
+# prenaseljenost_moski <- prenaseljenost %>% filter(spol == "moski", stopnja != "NA")
+# 
+# prenaseljenost_zenske <- prenaseljenost %>% filter(spol == "zenske", stopnja != "NA")
+# 
+# #odstranla podatke z vrednostjo NA 
+# # zemljevid2 <-ggplot() + aes(x = long, y=lat, group= group, fill= stopnja ) + geom_polygon(data = svet %>% filter(CONTINENT == "Europe" |
+# #                                                                                                                    SOVEREIGNT %in% c("Canada",
+# #                                                                                                                                      "United States of America")))
+# print(zemljevid2)
 
 
