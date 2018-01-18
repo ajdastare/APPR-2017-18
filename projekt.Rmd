@@ -37,7 +37,7 @@ Podatki so v obliki CSV in HTML. Vir podatkov: http://pxweb.stat.si/pxweb/Databa
 
 ```{r stopnja_prenaseljenosti, echo=FALSE, message=FALSE,warning = FALSE}
 kable(head(stopnja_prenaseljenosti))
-
+print(graf1)
 
 ```
 
