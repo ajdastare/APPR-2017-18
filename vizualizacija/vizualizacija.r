@@ -11,6 +11,24 @@ graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),color = Spol ))+
   xlab("Leto") + ylab("Odstotek oseb") +
   ggtitle("Stopnja prenaseljenosti stanovanja (2005-2016)")
 
+# graf2 <- ggplot(data =tabela1, aes(x= leto,color = element))
+# graf2 + geom_histogram(binwidth = 0.5)
+# 
+# 
+#   # # geom_bar(stat= "identity")+
+#   # xlab("Leto") + ylab("Odstotek oseb") +
+#   # ggtitle("Stopnja prikrajšanost (2014-2016)")
+
+
+graf3 <- ggplot(data =tabela1, aes(x= leto, y = stopnja, colour = spol)) + 
+  geom_bar(stat = "identity") +
+  facet_grid(. ~ element)
+  # geom_histogram(stat = "count",binwidth = 0.2) +
+  
+  
+
+
+
 
 
 # Uvozimo zemljevid.
