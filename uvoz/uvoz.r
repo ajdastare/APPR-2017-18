@@ -1,4 +1,5 @@
 # 2. faza: Uvoz podatkov
+library(reshape2)
 #1. CSV TABELA
 #STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016)
 
@@ -57,29 +58,18 @@ prenaseljenost <- rbind(pre.moski, pre.zenske) %>% mutate(stopnja = parse_number
 sl <- locale(encoding = "Windows-1250", decimal_mark = ".", grouping_mark = ",")
 zadovoljstvo <-"podatki/zadovoljstvo2.csv"
 
-tabela_zadovoljstvo <-read_csv2(zadovoljstvo,skip = 4,n_max= 9, trim_ws = TRUE, locale = sl, col_names = FALSE)%>% drop_na(3)
-
-colnames(tabela_zadovoljstvo) <- c("spol","kvantil","ocena","2012","2013","2014","2015","2016")
+tabela_zadovoljstvo <- read_csv2(zadovoljstvo, skip = 4, n_max= 7, trim_ws = TRUE, locale = sl) %>%
+  drop_na(3) %>% select(-1, -2) %>% rename(ocena = X3) %>%melt(id.vars = "ocena", variable.name = "leto", value.name = "odstotek") %>%
+  mutate(leto = parse_number(leto))
+#select(-1,-2)  pobriše prvi in drugi stolpec 
 
 # 4. tabela : breme stanovanjskih stroskov
 sl <- locale(encoding = "Windows-1250", decimal_mark = ".", grouping_mark = ",")
 stroski<-"podatki/breme_stanovanjskih_stroskov.csv"
-prvi_del <- read_delim(stroski, ";", skip = 2, n_max = 68, trim_ws = TRUE, locale=sl) %>%
-  fill(1:2) %>% drop_na(3)
-stolpci2 <- read_csv2(stroski, skip = 3, n_max = 1, col_names = FALSE,
-                      col_types = cols(.default = col_integer())) %>% t() %>%
-  cbind(data.frame(colnames(prvi_del) %>% strapplyc("^([^_]+)") %>% unlist())) %>% fill(1) %>%
-  apply(1, paste, collapse = "")
-
-stolpci2[1]= "gospodinjstvo"
-stolpci2[2] = "velikost bremena"
-colnames(prvi_del) <- stolpci2
-
-breme_stanovanjskih_stroskov <- prvi_del%>%drop_na()
-
-# prvi_del <- melt(prvi_del, value.name = "delez", id.vars = 1:3, variable.name = "stolpec") %>%
-#   mutate(stolpec = parse_character(stolpec, locale = sl)) %>%
-#   transmute(leto = stolpec %>% strapplyc("^([0-9]+)") %>% unlist() %>% parse_number(),
-#             status = stolpec %>% strapplyc("([^0-9]+)$") %>% unlist() %>% factor(),
-#             element, starost, spol, stopnja)
+breme_stanovanjskih_stroskov <- read_delim(stroski, ";", skip = 3, n_max = 16, trim_ws = TRUE, locale=sl) %>%
+  fill(1:2) %>% drop_na(3) %>%
+  rename(gospodinjstvo = X1, velikost.bremena = X2)%>%
+  melt(id.vars = c("gospodinjstvo", "velikost.bremena"),
+       variable.name = "leto", value.name = "odstotek") %>%
+  mutate(leto = parse_number(leto))
 
