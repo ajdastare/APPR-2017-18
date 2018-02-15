@@ -2,34 +2,42 @@
 # Graf 
 library(ggplot2)
 library(dplyr)
+library(digest)
 
 # 1.Graf bo prikazoval stopnjo prenaseljenosti v Sloveniji(STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016))
 
-graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),color = Spol ))+
+graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),colour = Spol ))+
   geom_point(shape=1)+
   geom_smooth(method=lm , color="red", se=TRUE)+
   xlab("Leto") + ylab("Odstotek oseb") +
   ggtitle("Stopnja prenaseljenosti stanovanja (2005-2016)")
 
-# graf2 <- ggplot(data =tabela1, aes(x= leto,color = element))
-# graf2 + geom_histogram(binwidth = 0.5)
-# 
-# 
-#   # # geom_bar(stat= "identity")+
-#   # xlab("Leto") + ylab("Odstotek oseb") +
-#   # ggtitle("Stopnja prikrajšanost (2014-2016)")
-
 # Graf : stanovanjske prikrajsanosti 
-graf3 <- ggplot(data =tabela1, aes(x= leto, y = stopnja, colour = spol)) + 
-  geom_bar(stat = "identity") +
+graf2 <- ggplot(data =tabela1, aes(x= leto, y = stopnja, colour = spol)) + 
+  geom_col() +
   facet_grid(. ~ element)
-  # geom_histogram(stat = "count",binwidth = 0.2) +
-# Graf : Stopnje prenaseljenosti v Evropi 
-  
+
+
 # Graf: samoocene splosnega zadovoljstva življenja
-graf4 <- ggplot(data =tabela_zadovoljstvo, aes(x =(), y =ocena ))+
-  geom_point(shape=1)
-  
+
+graf3 <- ggplot(data = tabela_zadovoljstvo, aes(x=leto, y = odstotek, colour = ocena ))+ 
+  geom_line()+
+  xlab("Leto") + ylab("Odstotek") +
+  ggtitle("Samoocena splošnega zadovoljstva življenja")
+
+
+# Graf : Breme stanovanjskih stroškov
+graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color=factor(velikost.bremena)) )+
+  geom_col() +
+  facet_grid(. ~ gospodinjstvo)+
+  xlab("Leto")+ ylab("Odstotek") +
+  ggtitle("Breme stanovanjskih stroškov")+
+  guides(color = guide_legend("Velikost bremena"))
+
+# Graf: Stopnje prenaseljenosti v eu 
+
+graf5 <- ggplot(data= prenaseljenost, aes(x = timegeo, y = stopnja))+
+  geom_col() + facet_grid(. ~ leto)
 
 
 # Uvozimo zemljevid.
