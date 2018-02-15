@@ -19,16 +19,17 @@ graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),color = Spol ))+
 #   # xlab("Leto") + ylab("Odstotek oseb") +
 #   # ggtitle("Stopnja prikrajšanost (2014-2016)")
 
-
+# Graf : stanovanjske prikrajsanosti 
 graf3 <- ggplot(data =tabela1, aes(x= leto, y = stopnja, colour = spol)) + 
   geom_bar(stat = "identity") +
   facet_grid(. ~ element)
   # geom_histogram(stat = "count",binwidth = 0.2) +
+# Graf : Stopnje prenaseljenosti v Evropi 
   
+# Graf: samoocene splosnega zadovoljstva življenja
+graf4 <- ggplot(data =tabela_zadovoljstvo, aes(x =(), y =ocena ))+
+  geom_point(shape=1)
   
-
-
-
 
 
 # Uvozimo zemljevid.
