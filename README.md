@@ -4,7 +4,7 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2017/18
 
 ## Tematika
 
-Izbrala sem  temo stanovanjski pogoji v Sloveniji. Analizirala bom podatke o stanovanjskih razmerah, prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države.
+Izbrala sem  temo stanovanjski pogoji v Sloveniji. Analizirala bom podatke o stanovanjskih razmerah, prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države. 
 
 Podatki so v obliki CSV in HTML.
 Vir podatkov: http://pxweb.stat.si/pxweb/Database/Dem_soc/Dem_soc.asp

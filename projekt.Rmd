@@ -24,7 +24,7 @@ source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
 
 # Izbira teme
 
-Izbrala sem temo stanovanjski pogoji v Sloveniji. Analizirala bom podatke o stanovanjskih razmerah, prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države.
+Izbrala sem temo stanovanjski pogoji v Sloveniji. Analizirala bom podatke o tem kakšno breme predstavljajo stanovanjski stroški, o stanovanjski prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države.
 
 Podatki so v obliki CSV in HTML. Vir podatkov: http://pxweb.stat.si/pxweb/Database/Dem_soc/Dem_soc.asp
 
@@ -57,7 +57,7 @@ kable(head(tabela1))
 
 
 ```{r prenaseljenost, echo=FALSE, message=FALSE,warning = FALSE}
-prenaseljenost %>% rename(`država` = timegeo) %>% head %>% kable()
+prenaseljenost %>% rename(`drzava` = timegeo) %>% head %>% kable()
 
 ```
 
@@ -73,15 +73,30 @@ prenaseljenost %>% rename(`država` = timegeo) %>% head %>% kable()
 Spodnji zemljevid prikazuje stopnjo prenaseljenosti v Evropi.  
 
 ```{r zemljevid_drzav, echo=FALSE, message=FALSE,warning = FALSE}
-print(zemljevid_drzav)
+# print(zemljevid_drzav)
 
 ```
 
+Spodnj graf prikazuje različne elemente prikrajšanosti in delež oseb, ki so deležni teh elementov prikrajšanosti v svojih bivališčih. Osebe so razdeljene tudi na spol. Vidimo, da je največji delež pri kategori slabo stanje stanovanja, z največjim deležem v letu 2014.
+
+```{r graf2, echo=FALSE, message=FALSE,warning = FALSE}
+print(graf2)
 
 ```
+
+Naslednji graf prikazuje breme stanovanjskih stroškov za lastnike, najemnike in uporabnike stanovanj. Stanovanjski stroški za vse navedene predstavljajo največje breme v letu 2011, najmanjše pa v letu 2007. Stanje se, če gledamo vse skupaj proti letu 2016 izboljšuje.
+
+
+```{r graf4, echo=FALSE, message=FALSE,warning = FALSE}
+print(graf4)
+
+```
+
 
 ***
 
+
+  
 # Napredna analiza podatkov
 
 

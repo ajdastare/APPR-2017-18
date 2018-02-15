@@ -16,9 +16,10 @@ shinyUI(fluidPage(
                              choices = sort(unique(prenaseljenost$spol))
                  )
                  ),
-      mainPanel(plotOutput("zemljevid_drzav")
+      mainPanel(plotOutput("Graf"))
       
       ))
-))
+  )
+
 
 

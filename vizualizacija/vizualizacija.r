@@ -3,6 +3,7 @@
 library(ggplot2)
 library(dplyr)
 library(digest)
+library(maptools)
 
 # 1.Graf bo prikazoval stopnjo prenaseljenosti v Sloveniji(STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016))
 
@@ -27,12 +28,23 @@ graf3 <- ggplot(data = tabela_zadovoljstvo, aes(x=leto, y = odstotek, colour = o
 
 
 # Graf : Breme stanovanjskih stroškov
-graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color=factor(velikost.bremena)) )+
-  geom_col() +
+
+graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color = velikost.bremena))+
+  geom_line()+
   facet_grid(. ~ gospodinjstvo)+
-  xlab("Leto")+ ylab("Odstotek") +
-  ggtitle("Breme stanovanjskih stroškov")+
-  guides(color = guide_legend("Velikost bremena"))
+  xlab("Leto") + ylab("Odstotek")+
+  ggtitle("Breme stanovanjskih stroskov")
+graf4$labels$colour <- "Velikost bremena"
+
+  
+
+
+# graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color=velikost.bremena) )+
+#   geom_col() +
+#   facet_grid(. ~ gospodinjstvo)+
+#   xlab("Leto")+ ylab("Odstotek") +
+#   ggtitle("Breme stanovanjskih stroškov")+
+#   guides(color = guide_legend("Velikost bremena"))
 
 # Graf: Stopnje prenaseljenosti v eu 
 
