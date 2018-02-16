@@ -1,10 +1,11 @@
 library(shiny)
+library(ggplot2)
 
 shinyServer(function(input, output) {
   output$prenaseljenost <- renderPlot({
     ggplot(data = prenaseljenost %>% filter(spol == input$spol,
-                                            timegeo = input$drzava
-                                            ) +
+                                            timegeo == input$drzava
+                                            ),
              aes(x = leto, y = stopnja)) +
       geom_col()
   })
