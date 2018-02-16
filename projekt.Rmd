@@ -73,7 +73,7 @@ prenaseljenost %>% rename(`drzava` = timegeo) %>% head %>% kable()
 Spodnji zemljevid prikazuje stopnjo prenaseljenosti v Evropi.  
 
 ```{r zemljevid_drzav, echo=FALSE, message=FALSE,warning = FALSE}
-# print(zemljevid_drzav)
+print(zemljevid_drzav)
 
 ```
 
@@ -98,10 +98,12 @@ print(graf4)
 
   
 # Napredna analiza podatkov
+Spodnji graf prikazuje napoved velikosti bremen skupaj za lastnike, najemnike in uporabnike stanovanj.
 
+```{r napoved_bremen, echo=FALSE, message=FALSE,warning = FALSE}
+print(napoved_bremen)
 
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
-
+```
 
 ***
 
