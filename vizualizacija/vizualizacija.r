@@ -14,10 +14,20 @@ graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),colour = Spol ))+
   ggtitle("Stopnja prenaseljenosti stanovanja (2005-2016)")
 
 # Graf : stanovanjske prikrajsanosti 
-graf2 <- ggplot(data =tabela1, aes(x= leto, y = stopnja, colour = spol)) + 
-  geom_col() +
+graf2 <- ggplot(data = tabela1 %>% filter(starost== "Starostne skupine - SKUPAJ",status == "Status tveganja revščine -SKUPAJ",spol != "Spol - SKUPAJ"), aes(x= leto, y = stopnja, fill= spol)) + 
+  geom_col(position = "dodge" ) +
   facet_grid(. ~ element)
 
+oznake <- c("Slabo stanje stanovanja" = "Slabo stanje\nstanovanja",
+            "Kad ali prha v stanovanju" = "Kad ali prha\nv stanovanju",
+            "Stranišče na izplakovanje za lastno uporabo" = "Stranišče na\nizplakovanje za\nlastno uporabo",
+            "Pretemno stanovanje" = "Pretemno stanovanje")
+graf22 <- ggplot(data = tabela1 %>% filter(status == "Status tveganja revščine -SKUPAJ",
+                                          starost == "Starostne skupine - SKUPAJ",
+                                          spol != "Spol - SKUPAJ"),
+                aes(x= leto, y = stopnja, fill = spol)) + 
+  geom_col(position = "dodge") +
+  facet_grid(. ~ oznake[element])
 
 # Graf: samoocene splosnega zadovoljstva življenja
 
@@ -33,7 +43,7 @@ graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, 
   geom_line()+
   facet_grid(. ~ gospodinjstvo)+
   xlab("Leto") + ylab("Odstotek")+
-  ggtitle("Breme stanovanjskih stroskov")
+  ggtitle("Breme stanovanjskih stroskov") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 graf4$labels$colour <- "Velikost bremena"
 
   

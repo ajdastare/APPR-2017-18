@@ -7,6 +7,7 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
+    runtime: shiny
 
 ---
 
@@ -19,6 +20,7 @@ output:
 source("lib/libraries.r", encoding = "UTF-8")
 source("uvoz/uvoz.r", encoding = "UTF-8")
 source("vizualizacija/vizualizacija.r", encoding = "UTF-8")
+source("analiza/analiza.r")
 
 ```
 
@@ -42,7 +44,7 @@ print(graf1)
 ```
 
 
-2.Tabela : Stopnja stanovanjske prikrajšanosti glede na elemente prikrajšanosti. Analizirala bom podatke odstotkov oseb glede na spol, starostno skupino in glede na socialni položaj, ki so prikrajšane za posamezni element stanovanjske prikrajšanosti. 
+2. Tabela : Stopnja stanovanjske prikrajšanosti glede na elemente prikrajšanosti. Analizirala bom podatke odstotkov oseb glede na spol, starostno skupino in glede na socialni položaj, ki so prikrajšane za posamezni element stanovanjske prikrajšanosti. 
 
 
 ```{r tabela1, echo=FALSE, message=FALSE,warning = FALSE}
@@ -73,8 +75,13 @@ prenaseljenost %>% rename(`drzava` = timegeo) %>% head %>% kable()
 Spodnji zemljevid prikazuje stopnjo prenaseljenosti v Evropi.  
 
 ```{r zemljevid_drzav, echo=FALSE, message=FALSE,warning = FALSE}
-print(zemljevid_drzav)
+#print(zemljevid_drzav)
 
+```
+
+Še bolj natančno pa si lahko ogledamo stopnjo prenaseljenosti v naslednjem prikazu podatkov.
+```{r shiny, echo = FALSE, message=FALSE, warning=FALSE}
+shinyAppDir("shiny", options=list(width="100%", height=600))
 ```
 
 Spodnj graf prikazuje različne elemente prikrajšanosti in delež oseb, ki so deležni teh elementov prikrajšanosti v svojih bivališčih. Osebe so razdeljene tudi na spol. Vidimo, da je največji delež pri kategori slabo stanje stanovanja, z največjim deležem v letu 2014.
