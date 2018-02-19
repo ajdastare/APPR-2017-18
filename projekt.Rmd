@@ -75,7 +75,7 @@ prenaseljenost %>% rename(`drzava` = timegeo) %>% head %>% kable()
 Spodnji zemljevid prikazuje stopnjo prenaseljenosti v Evropi.  
 
 ```{r zemljevid_drzav, echo=FALSE, message=FALSE,warning = FALSE}
-#print(zemljevid_drzav)
+print(zemljevid_drzav)
 
 ```
 

@@ -15,13 +15,15 @@ graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),colour = Spol ))+
 
 # Graf : stanovanjske prikrajsanosti 
 graf2 <- ggplot(data = tabela1 %>% filter(starost== "Starostne skupine - SKUPAJ",status == "Status tveganja revščine -SKUPAJ",spol != "Spol - SKUPAJ"), aes(x= leto, y = stopnja, fill= spol)) + 
-  geom_col(position = "dodge" ) +
-  facet_grid(. ~ element)
+  geom_col()+facet_grid(. ~ element)
 
 oznake <- c("Slabo stanje stanovanja" = "Slabo stanje\nstanovanja",
             "Kad ali prha v stanovanju" = "Kad ali prha\nv stanovanju",
             "Stranišče na izplakovanje za lastno uporabo" = "Stranišče na\nizplakovanje za\nlastno uporabo",
             "Pretemno stanovanje" = "Pretemno stanovanje")
+Encoding(oznake) <- "UTF-8"
+Encoding(names(oznake)) <- "UTF-8"
+
 graf22 <- ggplot(data = tabela1 %>% filter(status == "Status tveganja revščine -SKUPAJ",
                                           starost == "Starostne skupine - SKUPAJ",
                                           spol != "Spol - SKUPAJ"),
@@ -39,14 +41,23 @@ graf3 <- ggplot(data = tabela_zadovoljstvo, aes(x=leto, y = odstotek, colour = o
 
 # Graf : Breme stanovanjskih stroškov
 
-graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color = velikost.bremena))+
+graf4 <- ggplot(data = breme_stanovanjskih_stroskov, 
+                aes(x = leto, y= odstotek, color = velikost.bremena))+
   geom_line()+
   facet_grid(. ~ gospodinjstvo)+
   xlab("Leto") + ylab("Odstotek")+
-  ggtitle("Breme stanovanjskih stroskov") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
-graf4$labels$colour <- "Velikost bremena"
-
+  ggtitle("Breme stanovanjskih stroskov") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))+
+  guides(color = guide_legend("Velikost bremena"))
   
+# graf4$labels$colour <- "Velikost bremena"
+# 
+# graf4 <- ggplot(data = breme_stanovanjskih_stroskov,
+#                 aes(x = leto, y = odstotek, color = velikost.bremena)) +
+#   geom_line() + facet_grid(. ~ gospodinjstvo) + xlab("Leto") + ylab("Odstotek") +
+#   ggtitle("Breme stanovanjskih stroskov") + guides(color = guide_legend("Velikost bremena")) +
+#   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+#   
 
 
 # graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color=velikost.bremena) )+
