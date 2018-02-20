@@ -25,6 +25,7 @@ stolpci2 <- read_csv2(datoteka2, skip = 3, n_max = 1, col_names = FALSE,
                      col_types = cols(.default = col_integer())) %>% t() %>%
   cbind(data.frame(colnames(stan.pri2) %>% strapplyc("^([^_]+)") %>% unlist())) %>% fill(1) %>%
   apply(1, paste, collapse = "")
+
 stolpci2[1:3] <- c("element", "starost", "spol")
 colnames(stan.pri2) <- stolpci2
 stan.pri2 <- melt(stan.pri2, value.name = "stopnja", id.vars = 1:3, variable.name = "stolpec") %>%

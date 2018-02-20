@@ -22,6 +22,8 @@ oznake <- c("Slabo stanje stanovanja" = "Slabo stanje\nstanovanja",
             "Kad ali prha v stanovanju" = "Kad ali prha\nv stanovanju",
             "Stranišče na izplakovanje za lastno uporabo" = "Stranišče na\nizplakovanje za\nlastno uporabo",
             "Pretemno stanovanje" = "Pretemno stanovanje")
+Encoding(oznake) <- "UTF-8"
+Encoding(names(oznake)) <- "UTF-8"
 graf22 <- ggplot(data = tabela1 %>% filter(status == "Status tveganja revščine -SKUPAJ",
                                           starost == "Starostne skupine - SKUPAJ",
                                           spol != "Spol - SKUPAJ"),

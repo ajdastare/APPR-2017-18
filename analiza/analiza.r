@@ -64,7 +64,7 @@ napoved4 <- n %>% mutate(odstotek = lin_velikobreme)
 
 #izris napovedi
 napoved_bremen <- ggplot(vsa, aes(x = leto, y = odstotek,color = velikost.bremena)) + geom_line()+
-  geom_smooth(method = lm)+
+  geom_smooth(method = lm, fullrange = TRUE)+
   geom_point(data= napoved2, aes(x = leto,y = odstotek), color ='red', size =2)+
   geom_point(data = napoved3, aes(x=leto, y=odstotek), color = 'green', size = 2) +
   geom_point(data = napoved4, aes(x= leto, y = odstotek), color ='blue', size= 2)
