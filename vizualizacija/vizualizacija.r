@@ -41,13 +41,17 @@ graf3 <- ggplot(data = tabela_zadovoljstvo, aes(x=leto, y = odstotek, colour = o
 
 # Graf : Breme stanovanjskih stroškov
 
-graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color = velikost.bremena))+
-  geom_line()+
-  facet_grid(. ~ gospodinjstvo)+
-  xlab("Leto") + ylab("Odstotek")+
-  ggtitle("Breme stanovanjskih stroskov") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
-graf4$labels$colour <- "Velikost bremena"
-
+# graf4 <- ggplot(data = breme_stanovanjskih_stroskov, aes(x = leto, y= odstotek, color = velikost.bremena))+
+#   geom_line()+
+#   facet_grid(. ~ gospodinjstvo)+
+#   xlab("Leto") + ylab("Odstotek")+
+#   ggtitle("Breme stanovanjskih stroskov") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+# graf4$labels$colour <- "Velikost bremena"
+graf4 <- ggplot(data = breme_stanovanjskih_stroskov,
+                aes(x = leto, y = odstotek, color = velikost.bremena)) +
+  geom_line() + facet_grid(. ~ gospodinjstvo) + xlab("Leto") + ylab("Odstotek") +
+  ggtitle("Breme stanovanjskih stroskov") + guides(color = guide_legend("Velikost bremena")) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
   
 
 
