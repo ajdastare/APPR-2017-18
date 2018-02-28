@@ -14,8 +14,11 @@ graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),colour = Spol ))+
   ggtitle("Stopnja prenaseljenosti stanovanja (2005-2016)")
 
 # Graf : stanovanjske prikrajsanosti 
-graf2 <- ggplot(data = tabela1 %>% filter(starost== "Starostne skupine - SKUPAJ",status == "Status tveganja revščine -SKUPAJ",spol != "Spol - SKUPAJ"), aes(x= leto, y = stopnja, fill= spol)) + 
-  geom_col()+facet_grid(. ~ element)
+graf2 <- ggplot(data = tabela1 %>% filter(starost== "Starostne skupine - SKUPAJ",status == "Status tveganja revščine -SKUPAJ",spol != "Spol - SKUPAJ"), aes(x= leto, y = stopnja,fill= spol)) + 
+  geom_col()+
+  facet_grid( .~ element)
+  # facet_grid(paste(element, "~ ."))
+
 
 oznake <- c("Slabo stanje stanovanja" = "Slabo stanje\nstanovanja",
             "Kad ali prha v stanovanju" = "Kad ali prha\nv stanovanju",
@@ -29,7 +32,7 @@ graf22 <- ggplot(data = tabela1 %>% filter(status == "Status tveganja revščine
                                           spol != "Spol - SKUPAJ"),
                 aes(x= leto, y = stopnja, fill = spol)) + 
   geom_col(position = "dodge") +
-  facet_grid(. ~ oznake[element])
+  facet_grid( ~ oznake[element])
 
 # Graf: samoocene splosnega zadovoljstva življenja
 
@@ -80,14 +83,22 @@ svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthd
   
 
 
-zemljevid_drzav <-ggplot() + geom_polygon(data = prenaseljenost %>% 
+zemljevid_moski <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol == "moski") %>% 
                                       mutate(SOVEREIGNT = parse_factor(timegeo,levels(svet$SOVEREIGNT)))%>%
                                       right_join(svet, by = c("timegeo" = "NAME_LONG")),
                                     aes(x= long, y = lat,
                                         group = group,
                                         fill = stopnja)) +
   coord_cartesian(xlim = c(-22, 40), ylim = c(30, 70)) +
-  ggtitle("Stopnja prenaseljenosti v Evropi")
+  ggtitle("Stopnja prenaseljenosti za moske v Evropi")
+zemljevid_zenske <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol == "zenske") %>% 
+                                            mutate(SOVEREIGNT = parse_factor(timegeo,levels(svet$SOVEREIGNT)))%>%
+                                            right_join(svet, by = c("timegeo" = "NAME_LONG")),
+                                          aes(x= long, y = lat,
+                                              group = group,
+                                              fill = stopnja)) +
+  coord_cartesian(xlim = c(-22, 40), ylim = c(30, 70)) +
+  ggtitle("Stopnja prenaseljenosti za zenske v Evropi")
 
 
 

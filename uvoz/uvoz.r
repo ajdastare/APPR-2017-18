@@ -1,10 +1,11 @@
 # 2. faza: Uvoz podatkov
+
 library(reshape2)
 #1. CSV TABELA
 #STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016)
 
 
-sl <- locale(encoding = "Windows-1250", decimal_mark = ".", grouping_mark = ",")
+sl <- locale(encoding = "UTF-8", decimal_mark = ".", grouping_mark = ",")
 datoteka1 <- "podatki/stopnja_pre1.csv"
 
 stopnja_prenaseljenosti <-read_delim(datoteka1, ";",skip = 3, trim_ws = TRUE, locale = sl) %>%
@@ -33,8 +34,10 @@ stan.pri2 <- melt(stan.pri2, value.name = "stopnja", id.vars = 1:3, variable.nam
             status = stolpec %>% strapplyc("([^0-9]+)$") %>% unlist() %>% factor(),
             element, starost, spol, stopnja)
 
-tabela1 <- stan.pri2
-
+tabela1 <- stan.pri2 
+Encoding(levels(tabela1$status)) <- "UTF-8" # faktor
+Encoding(tabela1$spol) <- "UTF-8" # znakovni stolpec
+# 
 
 # 3.HTML TABELA (PRENASELJENOST PO DRŽAVAH)
 
