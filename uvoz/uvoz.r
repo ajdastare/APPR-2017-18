@@ -1,5 +1,5 @@
 # 2. faza: Uvoz podatkov
-
+source("lib/libraries.r")
 library(reshape2)
 #1. CSV TABELA
 #STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016)

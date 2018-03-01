@@ -90,7 +90,7 @@ zemljevid_moski <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol =
                                         group = group,
                                         fill = stopnja)) +
   coord_cartesian(xlim = c(-22, 40), ylim = c(30, 70)) +
-  ggtitle("Stopnja prenaseljenosti za moske v Evropi")
+  ggtitle("Stopnja prenaseljenosti za moške v Evropi")
 zemljevid_zenske <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol == "zenske") %>% 
                                             mutate(SOVEREIGNT = parse_factor(timegeo,levels(svet$SOVEREIGNT)))%>%
                                             right_join(svet, by = c("timegeo" = "NAME_LONG")),
@@ -98,7 +98,7 @@ zemljevid_zenske <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol 
                                               group = group,
                                               fill = stopnja)) +
   coord_cartesian(xlim = c(-22, 40), ylim = c(30, 70)) +
-  ggtitle("Stopnja prenaseljenosti za zenske v Evropi")
+  ggtitle("Stopnja prenaseljenosti za ženske v Evropi")
 
 
 
