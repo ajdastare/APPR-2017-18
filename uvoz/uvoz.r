@@ -1,10 +1,11 @@
 # 2. faza: Uvoz podatkov
+source("lib/libraries.r")
 library(reshape2)
 #1. CSV TABELA
 #STOPNJA PRENASELJENOSTI STANOVANJA (2005-2016)
 
 
-sl <- locale(encoding = "Windows-1250", decimal_mark = ".", grouping_mark = ",")
+sl <- locale(encoding = "UTF-8", decimal_mark = ".", grouping_mark = ",")
 datoteka1 <- "podatki/stopnja_pre1.csv"
 
 stopnja_prenaseljenosti <-read_delim(datoteka1, ";",skip = 3, trim_ws = TRUE, locale = sl) %>%
@@ -34,8 +35,10 @@ stan.pri2 <- melt(stan.pri2, value.name = "stopnja", id.vars = 1:3, variable.nam
             status = stolpec %>% strapplyc("([^0-9]+)$") %>% unlist() %>% factor(),
             element, starost, spol, stopnja)
 
-tabela1 <- stan.pri2
-
+tabela1 <- stan.pri2 
+Encoding(levels(tabela1$status)) <- "UTF-8" # faktor
+Encoding(tabela1$spol) <- "UTF-8" # znakovni stolpec
+# 
 
 # 3.HTML TABELA (PRENASELJENOST PO DRŽAVAH)
 
@@ -74,3 +77,14 @@ breme_stanovanjskih_stroskov <- read_delim(stroski, ";", skip = 3, n_max = 16, t
        variable.name = "leto", value.name = "odstotek") %>%
   mutate(leto = parse_number(leto))
 
+
+#5  Delež prebivalcev katerim so stanovanjski stroški preveliko breme 
+# delez<- read_html("http://ec.europa.eu/eurostat/tgm/web/_download/Eurostat_Table_tespm140HTMLNoDesc_bb759afd-69f5-4b14-89ed-c115cacfc96d.htm") %>%
+#   html_node(xpath="//table[@class='infoData']") %>% html_table() %>%
+#   melt(value.name = "stopnja", id.vars = "timegeo", variable.name = "leto")
+
+
+# sem gre datoteka ilc_lvho07a
+
+#6 Razporeditev prebivalstva po stanovanjskem razmerju
+#datoteka ilc_lvho02.html

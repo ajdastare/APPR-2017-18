@@ -1,4 +1,5 @@
 # Uvoz potrebnih knjižnic
+
 library(sp)
 library(maptools)
 library(digest)
