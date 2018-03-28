@@ -15,8 +15,14 @@ graf1 <- ggplot(data =tabela2, aes(x =Leto, y =(odstotek_oseb),colour = Spol ))+
 
 # Graf : stanovanjske prikrajsanosti 
 
-graf2 <- ggplot(data = tabela1 %>% filter(starost== "Starostne skupine - SKUPAJ",status == "Status tveganja rev<U+0161><U+010D>ine -SKUPAJ",spol != "Spol - SKUPAJ"), aes(x= leto, y = stopnja, fill= spol)) + 
-  geom_col(position = "dodge" ) +
+status.skupaj <- "Status tveganja revščine -SKUPAJ"
+Encoding(status.skupaj) <- "UTF-8"
+graf2 <- ggplot(data = tabela1 %>%
+                  filter(starost == "Starostne skupine - SKUPAJ",
+                         status == status.skupaj,
+                         spol != "Spol - SKUPAJ"),
+                aes(x = leto, y = stopnja, fill = spol)) + 
+  geom_col(position = "dodge") +
   facet_grid(. ~ element)
 
 # graf2 <- ggplot(data = tabela1 %>% filter(starost== "Starostne skupine - SKUPAJ",status == "Status tveganja revščine -SKUPAJ",spol != "Spol - SKUPAJ"), aes(x= leto, y = stopnja,fill= spol)) + 
@@ -80,7 +86,8 @@ svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthd
   pretvori.zemljevid() %>%  filter(CONTINENT %in% c("Europe"))
   
 
-
+naslov <- "Stopnja prenaseljenosti za moške v Evropi"
+Encoding(naslov) <- "UTF-8"
 zemljevid_moski <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol == "moski") %>% 
                                       mutate(SOVEREIGNT = parse_factor(timegeo,levels(svet$SOVEREIGNT)))%>%
                                       right_join(svet, by = c("timegeo" = "NAME_LONG")),
@@ -88,7 +95,7 @@ zemljevid_moski <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol =
                                         group = group,
                                         fill = stopnja)) +
   coord_cartesian(xlim = c(-22, 40), ylim = c(30, 70)) +
-  ggtitle("Stopnja prenaseljenosti za moške v Evropi")
+  ggtitle(naslov)
 zemljevid_zenske <-ggplot() + geom_polygon(data = prenaseljenost%>% filter(spol == "zenske") %>% 
                                             mutate(SOVEREIGNT = parse_factor(timegeo,levels(svet$SOVEREIGNT)))%>%
                                             right_join(svet, by = c("timegeo" = "NAME_LONG")),

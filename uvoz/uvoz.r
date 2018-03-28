@@ -6,11 +6,14 @@ library(reshape2)
 
 
 sl <- locale(encoding = "UTF-8", decimal_mark = ".", grouping_mark = ",")
+slwin <- locale(encoding = "Windows-1250", decimal_mark = ".", grouping_mark = ",")
+
 datoteka1 <- "podatki/stopnja_pre1.csv"
 
-stopnja_prenaseljenosti <-read_delim(datoteka1, ";",skip = 3, trim_ws = TRUE, locale = sl) %>%
+stopnja_prenaseljenosti <-read_delim(datoteka1, ";",skip = 3, trim_ws = TRUE, locale = slwin) %>%
   fill(1:2) %>% drop_na(3) %>% melt() %>% mutate(variable = parse_number(variable))
 colnames(stopnja_prenaseljenosti)<- c("Kategorija","Vsa gospodinjstva","Spol","Leto","odstotek_oseb")
+Encoding(stopnja_prenaseljenosti$Spol) <- "UTF-8"
 tabela2 <- stopnja_prenaseljenosti
 
 #melt je dal v stolpce, mutate spremeni leto v število
@@ -20,15 +23,16 @@ tabela2 <- stopnja_prenaseljenosti
 
 #datoteka2 <- "podatki/stanovanjska_prikrajsanost.csv"
 datoteka2 <- "podatki/0867806Ss.csv"
-stan.pri2 <- read_delim(datoteka2, ";", skip = 4, n_max = 68, trim_ws = TRUE, locale=sl) %>%
+stan.pri2 <- read_delim(datoteka2, ";", skip = 4, n_max = 68, trim_ws = TRUE, locale=slwin) %>%
   fill(1:2) %>% drop_na(3)
 stolpci2 <- read_csv2(datoteka2, skip = 3, n_max = 1, col_names = FALSE,
-                     col_types = cols(.default = col_integer())) %>% t() %>%
-  cbind(data.frame(colnames(stan.pri2) %>% strapplyc("^([^_]+)") %>% unlist())) %>% fill(1) %>%
-  apply(1, paste, collapse = "")
-
-stolpci2[1:3] <- c("element", "starost", "spol")
-colnames(stan.pri2) <- stolpci2
+                     col_types = cols(.default = col_integer())) %>% t()
+stolpci3 <- read_csv2(datoteka2, skip = 4, n_max = 1, col_names = FALSE,
+                      locale = slwin) %>% t()
+Encoding(stolpci3) <- "UTF-8"
+stolpci <- data.frame(stolpci2, stolpci3) %>% fill(1) %>% apply(1, paste, collapse = "")
+stolpci[1:3] <- c("element", "starost", "spol")
+colnames(stan.pri2) <- stolpci
 stan.pri2 <- melt(stan.pri2, value.name = "stopnja", id.vars = 1:3, variable.name = "stolpec") %>%
   mutate(stolpec = parse_character(stolpec)) %>%
   transmute(leto = stolpec %>% strapplyc("^([0-9]+)") %>% unlist() %>% parse_number(),
@@ -80,10 +84,16 @@ breme_stanovanjskih_stroskov <- read_delim(stroski, ";", skip = 3, n_max = 16, t
 
 #5  Delež prebivalcev katerim so stanovanjski stroški preveliko breme 
 # delez<- read_html("http://ec.europa.eu/eurostat/tgm/web/_download/Eurostat_Table_tespm140HTMLNoDesc_bb759afd-69f5-4b14-89ed-c115cacfc96d.htm") %>%
-#   html_node(xpath="//table[@class='infoData']") %>% html_table() %>%
+#  html_node(xpath="//table[@class='infoData']") %>% html_table() %>%
 #   melt(value.name = "stopnja", id.vars = "timegeo", variable.name = "leto")
 
-
+delez<- read_html("podatki/ilc_lvho07a.html") %>%
+  html_node(xpath="//table") %>% html_table()
+colnames(delez) <- c("drzava", 2003:2017)
+delez <- melt(delez[-nrow(delez), ], value.name = "stopnja", id.vars = "drzava",
+              variable.name = "leto") %>%
+  mutate(leto = parse_number(leto),
+         stopnja = parse_number(stopnja, na = ":"))
 # sem gre datoteka ilc_lvho07a
 
 #6 Razporeditev prebivalstva po stanovanjskem razmerju
