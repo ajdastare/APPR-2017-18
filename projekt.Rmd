@@ -90,8 +90,8 @@ shinyAppDir("shiny", options=list(width="100%", height=600))
 Spodnj graf prikazuje različne elemente prikrajšanosti in delež oseb, ki so deležni teh elementov prikrajšanosti v svojih bivališčih. Osebe so razdeljene tudi na spol. Vidimo, da je največji delež pri kategori slabo stanje stanovanja, z največjim deležem v letu 2014.
 
 ```{r graf2, echo=FALSE, message=FALSE,warning = FALSE}
-# # print(graf2)
-# 
+print(graf2)
+
 ```
 
 Naslednji graf prikazuje breme stanovanjskih stroškov za lastnike, najemnike in uporabnike stanovanj. Stanovanjski stroški za vse navedene predstavljajo največje breme v letu 2011, najmanjše pa v letu 2007. Stanje se, če gledamo vse skupaj proti letu 2016 izboljšuje.
