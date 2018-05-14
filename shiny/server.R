@@ -5,11 +5,19 @@ shinyServer(function(input, output) {
   output$prenaseljenost <- renderPlot({
     ggplot(data = prenaseljenost %>% filter(spol == input$spol,
                                             timegeo == input$drzava
-                                            ),
-             aes(x = leto, y = stopnja)) +
-      geom_col()
+    ),
+    aes(x = leto, y = stopnja)) +
+      geom_col() + ggtitle("Stopnja prenaseljenosti")
   })
-})
+  output$delez <- renderPlot({
+    ggplot(data = delez %>% filter(drzava == input$drzava),
+           aes(x = leto, y = stopnja)) +
+      geom_col()+
+      ggtitle("Delež prebivalstva katerim so stanovanjski stroški breme")
+  })
+}    
+)
+
 
 
 

@@ -26,52 +26,78 @@ source("analiza/analiza.r")
 
 # Izbira teme
 
-Izbrala sem temo stanovanjski pogoji v Sloveniji. Analizirala bom podatke o tem kakšno breme predstavljajo stanovanjski stroški, o stanovanjski prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države.
+Izbrala sem temo **stanovanjski pogoji** v Sloveniji. Analizirala bom podatke o tem kakšno breme predstavljajo stanovanjski stroški, o stanovanjski prikrajšanosti in prenaseljenosti. V končni fazi bom primerjala Slovenijo in ostale evropske države.
 
-Podatki so v obliki CSV in HTML. Vir podatkov: http://pxweb.stat.si/pxweb/Database/Dem_soc/Dem_soc.asp
+Podatki so v obliki CSV in HTML. Viri podatkov:
+
+* http://pxweb.stat.si/pxweb/Database/Dem_soc/Dem_soc.asp
+* http://pxweb.stat.si/pxweb/Dialog/varval.asp?ma=0867906S&ti=&path=../Database/Dem_soc/08_zivljenjska_raven/11_silc_stanovan_pogoji/15_08679_prenaseljenost/&lang=2
+* http://pxweb.stat.si/pxweb/Dialog/varval.asp?ma=0867806S&ti=&path=../Database/Dem_soc/08_zivljenjska_raven/11_silc_stanovan_pogoji/10_08678_stanovan_prikrajsanost/&lang=2
+* http://ec.europa.eu/eurostat/web/products-datasets/-/ilc_lvho05a
+* http://pxweb.stat.si/pxweb/Dialog/varval.asp?ma=0868215S&ti=&path=../Database/Dem_soc/08_zivljenjska_raven/14_silc_finan_zmozn_gospodin/10_08682_stanovan_stroski/&lang=2
 
 # Opis tabel
+Podatke sem uvozila v tabele v obliki *tidy data*. 
 
-1. Tabela: Stopnja prenaseljenosti stanovanja. To je odstotek oseb, ki živijo v stanovanjih s premajhnim številom sob glede na število članov gospodinjstva, zato bom v tabelo vključila podatke :
-- delež oseb v prenaseljenih stanovanjih 
-- spol
+Prva tabela predstavlja stopnjo prenaseljenosti stanovanja. To je odstotek oseb, ki živijo v stanovanjih s premajhnim številom sob glede na število članov gospodinjstva. V tabeli je podatek: 
 
+* *odstotek oseb* - številska spremenljivka 
+* *spol*- imenska spremenljivka
+* *leto* - številska spremenljivka, leto meritve 
+* *kategorija* in *vsa gospodinjstva* sta imenski spremenljivki, torej v svojem stolpcu,ki imata za vsako meritev enako vrednost
 
-```{r tabela2, echo=FALSE, message=FALSE,warning = FALSE}
-kable(head(tabela2))
+Druga tabela predstavlja podatke stanovanjske prikrajšanosti. Zajeti so elementi prikrajšanosti, odstotek oseb glede na spol in starostno skupino ter socialni položaj: 
 
-```
+* *leto* - številska spremenljivka: predstavla leto meritve, vrednosti so števila
+* *status* -imenska spremenljivka: predstavlja status tveganja revščine torej ali je posameznik nad ali pod pragom tveganja revščine
+* *element* - imenska spremenljivka: element prikrajšanosti
+* *starost* -imenska spremenljivka: starostna skupina 
+* *spol* -imenska spremenljivka
+* *stopnja* -številska spremenljivka: odstotek oseb 
 
-2. Tabela : Stopnja prenaseljenosti stanovanja v EU.Podobna tabeli 1, le da je za vsako državo v Evropski uniji podana stopnja prenseljenosti. 
+Tretja tabela predstavlja prenaseljenost po državah. Podobna je prvi tabeli. Podatki: 
 
+* *timegeo* - imenska spremenljivka: država
+* *leto* - šrevilska spremenljivka: leto meritve
+* *stopnja* -številska spremenljivka: stopnja prenaseljenosti
+* *spol* - imenska spremenljivka
 
-```{r prenaseljenost, echo=FALSE, message=FALSE,warning = FALSE}
-prenaseljenost %>% rename(`drzava` = timegeo) %>% head %>% kable()
+Zadnja tabela predstavlja delež prebivalcev, katerim stanovanjski stroški predstavljajo preveliko breme za gospodinjstvo glede na stanovanjsko razmerje gospodinjstva. Podatki:
 
-```
-
-
-
-3. Tabela : Stopnja stanovanjske prikrajšanosti glede na elemente prikrajšanosti. Analizirala bom podatke odstotkov oseb glede na spol, starostno skupino in glede na socialni položaj, ki so prikrajšane za posamezni element stanovanjske prikrajšanosti. 
-
-
-```{r tabela1, echo=FALSE, message=FALSE,warning = FALSE}
-kable(head(tabela1))
-
-
-```
-
-
-
-
-***
+* *gospodinjstvo* - imenska spremenljivka: stanovanjsko razmerje gospodinjstva
+* *velikost.bremena* - imenska spremenljivka: velikost bremena stanovanjskih stroškov
+* *leto* - številska spremenljivka: leto meritve
+* *odstotek* - številska spremenljivka: odstotek gospodinjstev
 
 
 ***
 
 # Analiza in vizualizacija podatkov
+V tem razdelku bom predstavila analizo in vizualizacijo podatkov s pomočjo grafov in zemljevidov. 
 
-Spodnji zemljevid prikazuje stopnjo prenaseljenosti v Evropi za moške in ženske.  
+Spodnj graf prikazuje različne elemente prikrajšanosti in delež oseb, ki so deležni teh elementov prikrajšanosti v svojih bivališčih. Osebe so razdeljene tudi na spol. 
+
+Najmanj sta zastopana elementa prikrajšanosti *kad ali prha v stanovanju* in *stranišče za izplakovanje za lastno uporabo*, kar je bilo pričakovano, saj je to eden izmed bistvenih elemntov stanovanja. Vidimo, da je največji delež pri kategoriji slabo stanje stanovanja, z največjim deležem v letu 2014. Delež žensk v primerjavi z moškimi je v tej kategoriji večji. Vidimo izboljšanje stanovanjskih razmer v zadnjih letih. 
+
+```{r graf2, echo=FALSE, message=FALSE,warning = FALSE}
+print(graf2)
+
+```
+
+Naslednji graf prikazuje breme stanovanjskih stroškov za lastnike, najemnike in uporabnike stanovanj v Sloveniji. Za lastnike je največji delež pri *srednje velikem bremenu*, za najemnike pa pri *velikem bremenu* pri uporabnikih pa je največji delež pri *srednje velikem bremenu*. Zanimivo je to, da je *srednje veliko breme* pri lastnikih večje kot pri najemnikih. Skupaj pa največje breme bredtavlja *srednje velikobreme*. Kasneje v vizualizaciji bom primerjala tudi stanje z ostalimi evropskimi državami. 
+
+```{r graf4, echo=FALSE, message=FALSE,warning = FALSE}
+print(graf4)
+
+```
+
+Sedaj pa si poglejmo še stopnjo prenaseljenosti stanovanja. Prvi graf prikazuje stopnjo prenaseljenosti stanovanja v Sloveniji.  Videti je da se trend prenaseljenosti znižuje. Prav tako ni velikih razlik med spoloma. 
+
+```{r graf1, echo=FALSE, message=FALSE,warning = FALSE}
+print(graf1)
+```
+
+Spodnja zemljevida prikazuje stopnjo prenaseljenosti v Evropi posebej za moške in za ženske za leto 2016. Vidimo, da se stopnje med spoloma ujemajo.Največji delež je v Srbiji tako za moške in ženske. V Sloveniji v prenatrpanih stanovanjskih pogojih živi manj prebivalcev od povprečja EU(28) in EU(27). 
 
 ```{r zemljevid_moski, echo=FALSE, message=FALSE,warning = FALSE}
 print(zemljevid_moski)
@@ -80,33 +106,20 @@ print(zemljevid_moski)
 print(zemljevid_zenske)
 ```
 
-
-Še bolj natančno pa si lahko ogledamo stopnjo prenaseljenosti v naslednjem prikazu podatkov.
+Še bolj natančno pa si lahko ogledamo *stopnjo prenaseljenosti* in *delež prebivalcev katerim so stanovanjski stroški preveliko breme* za posamezno državo in spol v naslednjem prikazu podatkov v obliki Shiny. 
 
 ```{r shiny, echo = FALSE, message=FALSE, warning=FALSE}
 shinyAppDir("shiny", options=list(width="100%", height=600))
-```
-
-Spodnj graf prikazuje različne elemente prikrajšanosti in delež oseb, ki so deležni teh elementov prikrajšanosti v svojih bivališčih. Osebe so razdeljene tudi na spol. Vidimo, da je največji delež pri kategori slabo stanje stanovanja, z največjim deležem v letu 2014.
-
-```{r graf2, echo=FALSE, message=FALSE,warning = FALSE}
-print(graf2)
-
-```
-
-Naslednji graf prikazuje breme stanovanjskih stroškov za lastnike, najemnike in uporabnike stanovanj. Stanovanjski stroški za vse navedene predstavljajo največje breme v letu 2011, najmanjše pa v letu 2007. Stanje se, če gledamo vse skupaj proti letu 2016 izboljšuje.
-
-
-```{r graf4, echo=FALSE, message=FALSE,warning = FALSE}
-print(graf4)
-
-```
-
+``` 
 
 ***
 
 # Napredna analiza podatkov
-Spodnji graf prikazuje napoved velikosti bremen skupaj za lastnike, najemnike in uporabnike stanovanj.
+Pri analizi podatkov sem se najprej osredotočila na stanje v Sloveniji. Ugotovila sem da ni velikih razlik med spoloma. Glede stopnje prenaseljenosti je razvidno, da se stopnja zmanjšuje v zadnjih treh letih. Prav tako, če pogledamo shiny ugotovimo da je bila stopnja prenaseljenosti bistveno višja v letih 2006-2010. 
+Če stopnjo prenaseljenosti primerjamo z evropskimi državami ugotovimo, da je stanje v Sloveniji pod povprečjem EU. 
+Delež pri srednje velikem bremenu je največji za lastnike, najemnike in uporabnike skupaj.Pričakovano je bilo da bo največje breme pri najemnikih. 
+Če primerjamo s stanjem v Evropi v letu 2016 le šestim članicam predstavljajo stanovanjski stroški manjše breme kot Sloveniji.
+Spodnji graf prikazuje napoved velikosti bremen skupaj za lastnike, najemnike in uporabnike stanovanj.Vidimo lahko, da se delež *niso breme* povečuje, *srednje veliko breme* pa  malenkost pada.
 
 ```{r napoved_bremen, echo=FALSE, message=FALSE,warning = FALSE}
 print(napoved_bremen)
@@ -114,4 +127,6 @@ print(napoved_bremen)
 ```
 
 ***
+
+
 
